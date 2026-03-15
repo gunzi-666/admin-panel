@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="50%" stop-color="#1f6feb"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#79c0ff"/>
+      <stop offset="100%" stop-color="#d2a8ff"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#1f6feb" flood-opacity="0.5"/>
+    </filter>
+    <filter id="innerGlow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feComposite in="blur" in2="SourceGraphic" operator="atop"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="url(#ring)" stroke-width="3" opacity="0.3"/>
+  <circle cx="256" cy="256" r="155" fill="none" stroke="url(#ring)" stroke-width="2" opacity="0.15"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#ring)" stroke-width="1.5" opacity="0.1"/>
+  <g filter="url(#shadow)">
+    <text x="256" y="350" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="280" fill="url(#glow)" letter-spacing="-8">G</text>
+  </g>
+  <line x1="340" y1="320" x2="400" y2="320" stroke="#58a6ff" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="405" cy="320" r="4" fill="#58a6ff" opacity="0.9"/>
+  <circle cx="130" cy="150" r="3" fill="#58a6ff" opacity="0.4"/>
+  <circle cx="390" cy="130" r="2.5" fill="#8b5cf6" opacity="0.5"/>
+  <circle cx="110" cy="370" r="2" fill="#d2a8ff" opacity="0.3"/>
+  <circle cx="400" cy="400" r="3" fill="#58a6ff" opacity="0.35"/>
+  <circle cx="160" cy="120" r="1.5" fill="#79c0ff" opacity="0.6"/>
+</svg>
