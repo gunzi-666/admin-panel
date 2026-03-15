@@ -53,77 +53,6 @@ server {
 }
 ```
 
-### 方式二：作为 V2Board 主题集成
-
-无需修改 V2Board 项目文件，通过主题系统加载：
-
-1. 在 V2Board 项目中创建主题目录：`public/theme/gadmin/`
-
-2. 将以下文件复制到主题目录：
-   ```
-   public/theme/gadmin/
-   ├── config.json          ← 主题描述文件（见下方）
-   ├── dashboard.blade.php  ← 入口模板（见下方）
-   ├── config.js            ← 运行时配置
-   ├── manifest.json        ← PWA 配置（需修改图标路径）
-   ├── sw.js                ← Service Worker
-   ├── icon.svg
-   ├── icon-192.svg
-   └── assets/              ← dist/assets/ 目录整个复制
-   ```
-
-3. 创建 `config.json`：
-   ```json
-   {
-     "name": "GAdmin",
-     "description": "现代化管理面板",
-     "configs": [
-       { "field_name": "theme_color", "label": "主题颜色", "type": "select", "default_value": "default", "options": ["default"] },
-       { "field_name": "theme_sidebar", "label": "侧边栏风格", "type": "select", "default_value": "dark", "options": ["dark", "light"] },
-       { "field_name": "theme_header", "label": "头部风格", "type": "select", "default_value": "dark", "options": ["dark", "light"] },
-       { "field_name": "background_url", "label": "背景图", "type": "input", "default_value": "" },
-       { "field_name": "custom_html", "label": "自定义HTML", "type": "textarea", "default_value": "" }
-     ]
-   }
-   ```
-
-4. 创建 `dashboard.blade.php`（资源路径需要指向 `/theme/gadmin/`，JS/CSS 文件名用 `assets/` 目录中的实际文件名）：
-   ```html
-   <!DOCTYPE html>
-   <html lang="zh-CN">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-       <meta name="theme-color" content="#141414" />
-       <meta name="apple-mobile-web-app-capable" content="yes" />
-       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-       <link rel="icon" type="image/svg+xml" href="/theme/gadmin/icon.svg" />
-       <link rel="manifest" href="/theme/gadmin/manifest.json" />
-       <title>{{$title}}</title>
-       <script src="/theme/gadmin/config.js"></script>
-       <script type="module" crossorigin src="/theme/gadmin/assets/index-XXXXX.js"></script>
-       <link rel="modulepreload" crossorigin href="/theme/gadmin/assets/vendor-XXXXX.js">
-       <link rel="modulepreload" crossorigin href="/theme/gadmin/assets/antd-XXXXX.js">
-       <link rel="modulepreload" crossorigin href="/theme/gadmin/assets/charts-XXXXX.js">
-       <link rel="stylesheet" crossorigin href="/theme/gadmin/assets/index-XXXXX.css">
-     </head>
-     <body>
-       <div id="root"></div>
-     </body>
-   </html>
-   ```
-   > 将 `XXXXX` 替换为 `assets/` 目录中实际的文件名 hash。
-
-5. 修改 `manifest.json` 中的图标路径为 `/theme/gadmin/icon.svg` 和 `/theme/gadmin/icon-192.svg`
-
-6. 将 `sw.js` 额外复制一份到 V2Board 的 `public/sw.js`（Service Worker 作用域要求）
-
-7. 在 V2Board 管理后台 **系统配置 → 个性化 → 前端主题** 中选择 `gadmin`，保存
-
-### 方式三：替换原版管理后台
-
-将 `dist/` 下的文件直接部署到 `public/assets/admin/` 目录，然后修改 `resources/views/admin.blade.php` 模板引用新的资源文件。
-
 ## 配置说明
 
 部署后编辑 `config.js` 进行配置：
@@ -160,16 +89,6 @@ window.__APP_CONFIG__ = {
 ```
 
 详细配置项说明请参阅 `config.js` 文件内的注释。
-
-## 从源码构建
-
-```bash
-cd api/frontend
-npm install
-npm run build
-```
-
-构建产物输出到 `dist/` 目录。
 
 ## 技术栈
 
